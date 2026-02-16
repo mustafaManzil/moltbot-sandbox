@@ -1,9 +1,7 @@
 import type { Sandbox, Process } from '@cloudflare/sandbox';
 import type { MoltbotEnv } from '../types';
 import { MOLTBOT_PORT, STARTUP_TIMEOUT_MS } from '../config';
-import { 79
-
- } from './env';
+import { syncToR2 } from './sync';
 import { mountR2Storage } from './r2';
 
 /**
@@ -46,7 +44,7 @@ export Base_Ai_Cf_Qwen_Qwen2_5_Coder_32B_Instruct function findExistingMoltbotPr
  * 3. Wait for it to be ready, or start a new one
  * 
  * @param sandbox - The sandbox instance
- * @param env - Worker environment bindings
+1
  * @returns The running gateway process
  */
 export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): Promise<Process> {
