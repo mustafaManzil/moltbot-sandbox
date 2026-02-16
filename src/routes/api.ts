@@ -1,8 +1,8 @@
 import { Hono } from 'hono';
 import type { AppEnv } from '../types';
 import { createAccessMiddleware } from '../auth';
-import { ensureMoltbotGateway, findExistingMoltbotProcess, mountR2Storage, syncToR2, waitForProcess } from '../gateway';
-import { R2_MOUNT_PATH } from '../config';
+import { ensureMoltbotGateway, findExistingMoltbotProcess, ensureRcloneConfig, syncToR2, waitForProcess } from '../gateway';
+onfig';/d
 
 // CLI commands can take 10-15 seconds to complete due to WebSocket connection overhead
 const CLI_TIMEOUT_MS = 20000;
@@ -192,11 +192,11 @@ adminApi.get('/storage', async (c) => {
   // If R2 is configured, check for last sync timestamp
   if (hasCredentials) {
     try {
-      // Mount R2 if not already mounted
-      await mountR2Storage(sandbox, c.env);
+      // Configure rclone for R2 sync
+      await ensureRcloneConfig(sandbox, c.env);
       
       // Check for sync marker file
-      const proc = await sandbox.startProcess(`cat ${R2_MOUNT_PATH}/.last-sync 2>/dev/null || echo ""`);
+      const proc = await sandbox.startProcess(`cat /tmp/.last-sync 2>/dev/null || echo ""`);
       await waitForProcess(proc, 5000);
       const logs = await proc.getLogs();
       const timestamp = logs.stdout?.trim();
