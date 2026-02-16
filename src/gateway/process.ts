@@ -87,7 +87,7 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
   let process: Process;
   try {
     process = await sandbox.startProcess(command, {
-      env: Object.keys(envVars).length > 0 ? envVars : undefined,
+      env: envVars
     });
     console.log('Process started with id:', process.id, 'status:', process.status);
   } catch (startErr) {
