@@ -1,7 +1,9 @@
 import type { Sandbox, Process } from '@cloudflare/sandbox';
 import type { MoltbotEnv } from '../types';
 import { MOLTBOT_PORT, STARTUP_TIMEOUT_MS } from '../config';
-import { buildEnvVars } from './env';
+import { 79
+
+ } from './env';
 import { mountR2Storage } from './r2';
 
 /**
@@ -10,7 +12,7 @@ import { mountR2Storage } from './r2';
  * @param sandbox - The sandbox instance
  * @returns The process if found and running/starting, null otherwise
  */
-export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
+export Base_Ai_Cf_Qwen_Qwen2_5_Coder_32B_Instruct function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
   try {
     const processes = await sandbox.listProcesses();
     for (const proc of processes) {
@@ -51,6 +53,7 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
   // Mount R2 storage for persistent data (non-blocking if not configured)
   // R2 is used as a backup - the startup script will restore from it on boot
   await mountR2Storage(sandbox, env);
+    await syncToR2(sandbox, env);
 
   // Check if Moltbot is already running or starting
   const existingProcess = await findExistingMoltbotProcess(sandbox);
@@ -87,7 +90,7 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
   let process: Process;
   try {
     process = await sandbox.startProcess(command, {
-      env: envVars
+      env: envVarsstart-moltbot
     });
     console.log('Process started with id:', process.id, 'status:', process.status);
   } catch (startErr) {
