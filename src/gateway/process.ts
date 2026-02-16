@@ -1,6 +1,7 @@
 import type { Sandbox, Process } from '@cloudflare/sandbox';
 import type { MoltbotEnv } from '../types';
 import { MOLTBOT_PORT, STARTUP_TIMEOUT_MS } from '../config';
+import { buildEnvVars } from './env';
 import { syncToR2 } from './sync';
 import { mountR2Storage } from './r2';
 
@@ -10,7 +11,7 @@ import { mountR2Storage } from './r2';
  * @param sandbox - The sandbox instance
  * @returns The process if found and running/starting, null otherwise
  */
-export Base_Ai_Cf_Qwen_Qwen2_5_Coder_32B_Instruct function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
+export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
   try {
     const processes = await sandbox.listProcesses();
     for (const proc of processes) {
