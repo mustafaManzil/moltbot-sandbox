@@ -2,7 +2,6 @@ import { Hono } from 'hono';
 import type { AppEnv } from '../types';
 import { createAccessMiddleware } from '../auth';
 import { ensureMoltbotGateway, findExistingMoltbotProcess, ensureRcloneConfig, syncToR2, waitForProcess } from '../gateway';
-onfig';/d
 
 // CLI commands can take 10-15 seconds to complete due to WebSocket connection overhead
 const CLI_TIMEOUT_MS = 20000;
